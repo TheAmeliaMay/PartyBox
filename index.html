@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PartyBox — Fake Wikipedia Political Party Info-Box</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="favicon.svg" rel="icon" type="image/svg+xml">
+
+    <meta charset="utf-8">
+    <meta lang="en">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Amelia May Johnson">
+    <meta name="description" content="Use this form to generate a fake Wikipedia political party info-box!">
+
+    <script type="text/javascript">
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Fill in all the previously submitted fields
+        window.onload = function() {
+            for(var pair of urlParams.entries()) {
+                if (pair[0] == 'nationalColors') {
+                    document.getElementById('field-'+pair[0]).checked = true;
+                    continue;
+                }
+                document.getElementById('field-'+pair[0]).value = pair[1];
+            }
+        }
+
+        function reset() {
+            document.location.href = document.location.href.split('?')[0];
+        }
+    </script>
+</head>
+<body>
+    <h1>PartyBox</h1>
+    <p>Use this form to generate a fake Wikipedia political party info-box! When you're done, you can take a screenshot or save the URL above. If it doesn't work: make sure JavaScript is enabled in your browser!</p>
+
+    <script type="text/javascript">
+        // Create the info-box
+        if (urlParams.get('partyName') !== null) {
+            // Create the info-box, print its name, and set its display color
+            document.write(`
+            <table id="infoBox" style="width: 100%;">
+            <colgroup>
+                <col span=1 style="width: 40%;">
+                <col span=1 style="width: 60%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th colspan=2>
+                        <div id="partyName" style="border-color: ${urlParams.get('displayColor')};text-align:center;">${urlParams.get('partyName')}</div>
+                    </th>
+                </tr>
+            `);
+
+            // Display the provided information
+            if (urlParams.get('logo') !== '') {
+                document.write(`<tr><td colspan=2 style="padding-top:.4em;padding-bottom:.3em;text-align:center;"><img id="logo" src="${urlParams.get('logo')}" width=180></td></tr>`);
+            }
+
+            if (urlParams.get('abbr') !== '') {
+                document.write(`<tr><th>Abbreviation</th><td>${urlParams.get('abbr')}</td></tr>`);
+            }
+
+            if (urlParams.get('chairperson') !== '') {
+                document.write(`<tr><th class="fakeLink">Chairperson</th><td class="fakeLink">${urlParams.get('chairperson')}</td></tr>`);
+            }
+
+            if (urlParams.get('founders') !== '') {
+                document.write(`<tr><th>Founders</th><td class="fakeLink">${urlParams.get('founders').replaceAll('\n', '<br>')}</td></tr>`);
+            }
+
+            if (urlParams.get('founded') !== '') {
+                document.write(`<tr><th>Founded</th><td>${urlParams.get('founded')}</td></tr>`);
+            }
+
+            if (urlParams.get('split') !== '') {
+                document.write(`<tr><th>Split from</th><td class="fakeLink">${urlParams.get('split').replaceAll('\n', '<br>')}</td></tr>`);
+            }
+
+            if (urlParams.get('merged') !== '') {
+                document.write(`<tr><th>Merger of</th><td class="fakeLink">${urlParams.get('merged').replaceAll('\n', '<br>')}</td></tr>`);
+            }
+
+            if (urlParams.get('preceeded') !== '') {
+                document.write(`<tr><th>Preceeded by</th><td class="fakeLink">${urlParams.get('preceeded').replaceAll('\n', '<br>')}</td></tr>`);
+            }
+
+            if (urlParams.get('ideology') !== '') {
+                document.write(`<tr><th class="fakeLink">Ideology</th><td class="fakeLink">${urlParams.get('ideology').replaceAll('\n', '<br>')}</td></tr>`);
+            }
+
+            if (urlParams.get('majIdeo') !== '' && urlParams.get('factions') !== '') {
+                document.write(`<tr><th class="fakeLink">Ideology</th><td><b>Majority:</b><ul><li class="fakeLink">${urlParams.get('majIdeo').replaceAll('\n', '</li><li class="fakeLink">')}</li></ul><b>Factions:</b><ul><li class="fakeLink">${urlParams.get('factions').replaceAll('\n', '</li><li class="fakeLink">')}</li></ul></td></tr>`);
+            }
+
+            if (urlParams.get('position') !== '') {
+                document.write(`<tr><th>Political position</th><td><span class="fakeLink">${urlParams.get('position')}</span>`);
+
+                if (urlParams.get('position2') !== '') {
+                    document.write(` to <span class="fakeLink">${urlParams.get('position2')}</span>`);
+                }
+
+                if (urlParams.get('socPos') !== '') {
+                    document.write(`<br><b>Social:</b> <span class="fakeLink">${urlParams.get('socPos')}</span>`)
+                }
+
+                if (urlParams.get('socPos2') !== '') {
+                    document.write(` to <span class="fakeLink">${urlParams.get('socPos2')}</span>`);
+                }
+
+                if (urlParams.get('fisPos') !== '') {
+                    document.write(`<br><b>Fiscal:</b> <span class="fakeLink">${urlParams.get('fisPos')}</span>`)
+                }
+
+                if (urlParams.get('fisPos2') !== '') {
+                    document.write(` to <span class="fakeLink">${urlParams.get('fisPos2')}</span>`);
+                }
+
+                document.write('</td></tr>');
+            }
+
+
+            if (urlParams.get('colorName1') !== '') {
+                document.write(`<tr><th>Colors</th><td><span class="legend-color" style="background-color: ${urlParams.get('color1')};">&nbsp;</span>`);
+
+                if (urlParams.get('colorName2') !== '') {
+                    if (urlParams.get('colorName3') !== '') {
+                        document.write(` <span class="legend-color" style="background-color: ${urlParams.get('color2')};">&nbsp;</span> <span class="legend-color" style="background-color: ${urlParams.get('color3')};">&nbsp;</span> <span class="fakeLink">${urlParams.get('colorName1')}</span>, <span class="fakeLink">${urlParams.get('colorName2')}</span> and <span class="fakeLink">${urlParams.get('colorName3')}</span>`);
+                    } else {
+                        document.write(` <span class="legend-color" style="background-color: ${urlParams.get('color2')};">&nbsp;</span> <span class="fakeLink">${urlParams.get('colorName1')}</span> and <span class="fakeLink">${urlParams.get('colorName2')}</span>`);
+                    }
+                } else {
+                    document.write(` <span class="fakeLink">${urlParams.get('colorName1')}</span>`);
+                }
+
+                if (urlParams.get('nationalColors') !== '') {
+                    document.write(' (<span class="fakeLink">national colors</span>)')
+                }
+
+                if (urlParams.get('DF_colorName1') !== '') {
+                    document.write(`<br><span class="legend-color" style="background-color: ${urlParams.get('DF_color1')};">&nbsp;</span>`);
+                    if (urlParams.get('DF_colorName2') !== '') {
+                        if (urlParams.get('DF_colorName3') !== '') {
+                            document.write(` <span class="legend-color" style="background-color: ${urlParams.get('DF_color2')};">&nbsp;</span> <span class="legend-color" style="background-color: ${urlParams.get('DF_color3')};">&nbsp;</span> <span class="fakeLink">${urlParams.get('DF_colorName1')}</span>, <span class="fakeLink">${urlParams.get('DF_colorName2')}</span> and <span class="fakeLink">${urlParams.get('DF_colorName3')}</span>`);
+                        } else {
+                            document.write(` <span class="legend-color" style="background-color: ${urlParams.get('DF_color2')};">&nbsp;</span> <span class="fakeLink">${urlParams.get('DF_colorName1')}</span> and <span class="fakeLink">${urlParams.get('DF_colorName2')}</span>`);
+                        }
+                    } else {
+                        document.write(` <span class="fakeLink">${urlParams.get('DF_colorName1')}</span>`);
+                    }
+
+                    document.write(' (de facto)');
+                }
+
+                document.write('</td></tr>');
+            }
+
+            if (urlParams.get('houseName1') !== '' && urlParams.get('houseSeats1') !== '' && urlParams.get('houseTotal1') !== '') {
+                var percent = Math.round(urlParams.get('houseSeats1') / urlParams.get('houseTotal1') * 100);
+                document.write(`<tr><th>
+                    <span class="fakeLink">Seats</span> in the <span class="fakeLink">${urlParams.get('houseName1')}</span></th>
+                    <td>${urlParams.get('houseSeats1')} / ${urlParams.get('houseTotal1')}
+                    <div class="seatsBar">
+                        <div style="background-color: ${urlParams.get('displayColor')}; width: ${percent}px;">&nbsp;</div>
+                    </div></td></tr>`);
+            }
+
+            if (urlParams.get('houseName2') !== '' && urlParams.get('houseSeats2') !== '' && urlParams.get('houseTotal2') !== '') {
+                var percent = Math.round(urlParams.get('houseSeats2') / urlParams.get('houseTotal2') * 100);
+                document.write(`<tr><th>
+                    <span class="fakeLink">Seats</span> in the <span class="fakeLink">${urlParams.get('houseName2')}</span></th>
+                    <td>${urlParams.get('houseSeats2')} / ${urlParams.get('houseTotal2')}
+                    <div class="seatsBar">
+                        <div style="background-color: ${urlParams.get('displayColor')}; width: ${percent}px;">&nbsp;</div>
+                    </div></td></tr>`);
+            }
+
+            if (urlParams.get('stateGov') !== '' && urlParams.get('stateGovTotal') !== '') {
+                var percent = Math.round(urlParams.get('stateGov') / urlParams.get('stateGovTotal') * 100);
+                document.write(`<tr><th class="fakeLink">State governorships</th><td>${urlParams.get('stateGov')} / ${urlParams.get('stateGovTotal')}
+                    <div class="seatsBar"><div style="background-color: ${urlParams.get('displayColor')}; width: ${percent}px;">&nbsp;</div></div>
+                    </td></tr>`);
+            }
+
+            if (urlParams.get('stateUp') !== '' && urlParams.get('stateUpTotal') !== '') {
+                var percent = Math.round(urlParams.get('stateUp') / urlParams.get('stateUpTotal') * 100);
+                document.write(`<tr><th><span class="fakeLink">Seats</span> in <span class="fakeLink">state upper chambers</span></th>
+                    <td>${urlParams.get('stateUp')} / ${urlParams.get('stateUpTotal')}
+                    <div class="seatsBar"><div style="background-color: ${urlParams.get('displayColor')}; width: ${percent}px;">&nbsp;</div></div>
+                    </td></tr>`);
+            }
+
+            if (urlParams.get('stateLow') !== '' && urlParams.get('stateLowTotal') !== '') {
+                var percent = Math.round(urlParams.get('stateLow') / urlParams.get('stateLowTotal') * 100);
+                document.write(`<tr><th><span class="fakeLink">Seats</span> in <span class="fakeLink">state lower chambers</span></th>
+                    <td>${urlParams.get('stateLow')} / ${urlParams.get('stateLowTotal')}
+                    <div class="seatsBar"><div style="background-color: ${urlParams.get('displayColor')}; width: ${percent}px;">&nbsp;</div></div>
+                    </td></tr>`);
+            }
+
+            if (urlParams.get('terrGov') !== '' && urlParams.get('terrGovTotal') !== '') {
+                var percent = Math.round(urlParams.get('terrGov') / urlParams.get('terrGovTotal') * 100);
+                document.write(`<tr><th class="fakeLink">Territorial governorships</th><td>${urlParams.get('terrGov')} / ${urlParams.get('terrGovTotal')}
+                    <div class="seatsBar"><div style="background-color: ${urlParams.get('displayColor')}; width: ${percent}px;">&nbsp;</div></div>
+                    </td></tr>`);
+            }
+
+            if (urlParams.get('terrUp') !== '' && urlParams.get('terrUpTotal') !== '') {
+                var percent = Math.round(urlParams.get('terrUp') / urlParams.get('terrUpTotal') * 100);
+                document.write(`<tr><th><span class="fakeLink">Seats</span> in <span class="fakeLink">territorial upper chambers</span></th>
+                    <td>${urlParams.get('terrUp')} / ${urlParams.get('terrUpTotal')}
+                    <div class="seatsBar"><div style="background-color: ${urlParams.get('displayColor')}; width: ${percent}px;">&nbsp;</div></div>
+                    </td></tr>`);
+            }
+
+            if (urlParams.get('terrLow') !== '' && urlParams.get('terrLowTotal') !== '') {
+                var percent = Math.round(urlParams.get('terrLow') / urlParams.get('terrLowTotal') * 100);
+                document.write(`<tr><th><span class="fakeLink">Seats</span> in <span class="fakeLink">territorial lower chambers</span></th>
+                    <td>${urlParams.get('terrLow')} / ${urlParams.get('terrLowTotal')}
+                    <div class="seatsBar"><div style="background-color: ${urlParams.get('displayColor')}; width: ${percent}px;">&nbsp;</div></div>
+                    </td></tr>`);
+            }
+
+            if (urlParams.get('website') !== '') {
+                document.write(`<tr style="text-align:center;"><td colspan=2><b>Website</b></td></tr><tr style="text-align:center;"><td colspan=2><span class="fakeLinkExt">${urlParams.get('website')}</span> <img src="pencil.png" style="vertical-align: text-top;"></td></tr>`);
+            }
+
+            document.write(`<tr><td colspan=2>
+                <div style="border-top: 2px solid ${urlParams.get('displayColor')}; text-align: center; padding-top: 5px;" class="fakeLink">
+                    Politics of ${urlParams.get('country')}<br>
+                    Political Parties<br>
+                    Elections<br>
+                </div>
+                </td></tr></tbody></table>
+                <button onclick="reset()">Reset</button>`);
+        }
+    </script>
+
+    <form method="get">
+        <h2>Basic Information</h2>
+
+        <p>Every party must have a name, country, and display color (set to black by default). Please upload your party's logo (if it has one) to another website and paste the direct link below.</p>
+
+        <label for="field-partyName">Name</label>
+        <input id="field-partyName" name="partyName" type="text" required><br>
+
+        <label for="field-country">Country</label>
+        <input id="field-country" name="country" type="text" required><br>
+
+        <label for="field-displayColor">Display Color</label>
+        <input id="field-displayColor" name="displayColor" type="color" required><br>
+
+        <label for="field-logo">Logo URL</label>
+        <input id="field-logo" name="logo" type="text"><br>
+
+        <label for="field-abbr">Abbreviation</label>
+        <input id="field-abbr" name="abbr" type="text"><br>
+
+        <label for="field-website">Website</label>
+        <input id="field-website" name="website" type="text"><br>
+
+        <label for="field-chairperson">Chairperson</label>
+        <input id="field-chairperson" name="chairperson" type="text"><br>
+
+        <label for="field-founded">Date Founded</label>
+        <input id="field-founded" name="founded" type="text"><br>
+
+        <label for="field-founders" style="vertical-align: top;">Founders</label>
+        <textarea id="field-founders" name="founders" style="margin-top: 5px;"></textarea><br>
+
+
+        <h2>Colors</h2>
+
+        <p>The colors listed for the party. Some parties have "de facto" colors if their official ones aren't typically used. Input the color name to the right of the color selection menu; colors without a name will be ignored.</p>
+
+        <label for="field-color1">All Colors</label>
+        <input id="field-color1" name="color1" type="color">
+        <input id="field-colorName1" name="colorName1" class="colorName" type="text">
+
+        <input id="field-color2" name="color2" type="color">
+        <input id="field-colorName2" name="colorName2" class="colorName" type="text">
+
+        <input id="field-color3" name="color3" type="color">
+        <input id="field-colorName3" name="colorName3" class="colorName" type="text">
+
+        <input id="field-nationalColors" name="nationalColors" type="checkbox">
+        <label for="field-nationalColors">national colors</label>
+        <br>
+
+        <label for="field-DF_color1">De Facto Colors</label>
+        <input id="field-DF_color1" name="DF_color1" type="color">
+        <input id="field-DF_colorName1" name="DF_colorName1" class="colorName" type="text">
+
+        <input id="field-DF_color2" name="DF_color2" type="color">
+        <input id="field-DF_colorName2" name="DF_colorName2" class="colorName" type="text">
+
+        <input id="field-DF_color3" name="DF_color3" type="color">
+        <input id="field-DF_colorName3" name="DF_colorName3" class="colorName" type="text">
+        <br>
+
+
+        <h2>Predecessor Parties</h2>
+
+        <p>Some parties have predecessors, split from another party, or resulted from a merger. Put multiple answers on separate lines.</p>
+
+        <label for="field-preceeded">Preceeded by</label><br>
+        <textarea id="field-preceeded" name="preceeded"></textarea><br>
+
+        <label for="field-split">Split From</label><br>
+        <textarea id="field-split" name="split"></textarea><br>
+
+        <label for="field-merged">Merger of</label><br>
+        <textarea id="field-merged" name="merged"></textarea><br>
+
+
+        <h2>Ideology</h2>
+
+        <p>List the political ideology or ideologies the party adheres to. If factions exist: fill out the last two fields instead of the first. Put multiple answers on separate lines.</p>
+
+        <label for="field-ideology">Ideology</label><br>
+        <textarea id="field-ideology" name="ideology"></textarea><br>
+
+        <label for="field-majIdeo">Majority ideology</label><br>
+        <textarea id="field-majIdeo" name="majIdeo"></textarea><br>
+
+        <label for="field-factions">Factions</label><br>
+        <textarea id="field-factions" name="factions"></textarea><br>
+
+
+        <h2>Political Position</h2>
+
+        <p>Choose a political position on the left-right spectrum. Some parties don't fall neatly into "left" or "right," so separate social and fiscal positions can be defined. Blank fields won't be used.</p>
+
+        <label for="field-position">Position</label>
+        <select name="position" id="field-position">
+            <option value=""></option>
+            <option value="Big tent">Big tent</option>
+            <option value="Left-wing">Left-wing</option>
+            <option value="Right-wing">Right-wing</option>
+            <option value="Center">Center</option>
+            <option value="Center-left">Center-left</option>
+            <option value="Center-right">Center-right</option>
+            <option value="Far-left">Far-left</option>
+            <option value="Car-right">Far-right</option>
+            <option value="Syncretic">Syncretic</option>
+        </select>
+
+        <span>to</span>
+
+        <select name="position2" id="field-position2">
+            <option value=""></option>
+            <option value="big tent">Big tent</option>
+            <option value="left-wing">Left-wing</option>
+            <option value="right-wing">Right-wing</option>
+            <option value="center">Center</option>
+            <option value="center-left">Center-left</option>
+            <option value="center-right">Center-right</option>
+            <option value="far-left">Far-left</option>
+            <option value="far-right">Far-right</option>
+            <option value="syncretic">Syncretic</option>
+        </select>
+        <br>
+
+        <label for="field-socPos">Social Position</label>
+        <select name="socPos" id="field-socPos">
+            <option value=""></option>
+            <option value="Big tent">Big tent</option>
+            <option value="Left-wing">Left-wing</option>
+            <option value="Right-wing">Right-wing</option>
+            <option value="Center">Center</option>
+            <option value="Center-left">Center-left</option>
+            <option value="Center-right">Center-right</option>
+            <option value="Far-left">Far-left</option>
+            <option value="Far-right">Far-right</option>
+            <option value="Syncretic">Syncretic</option>
+        </select>
+
+        <span>to</span>
+
+        <select name="socPos2" id="field-socPos2">
+            <option value=""></option>
+            <option value="big tent">Big tent</option>
+            <option value="left-wing">Left-wing</option>
+            <option value="right-wing">Right-wing</option>
+            <option value="center">Center</option>
+            <option value="center-left">Center-left</option>
+            <option value="center-right">Center-right</option>
+            <option value="far-left">Far-left</option>
+            <option value="far-right">Far-right</option>
+            <option value="syncretic">Syncretic</option>
+        </select>
+        <br>
+
+        <label for="field-fisPos">Fiscal Position</label>
+        <select name="fisPos" id="field-fisPos">
+            <option value=""></option>
+            <option value="Big tent">Big tent</option>
+            <option value="Left-wing">Left-wing</option>
+            <option value="Right-wing">Right-wing</option>
+            <option value="Center">Center</option>
+            <option value="Center-left">Center-left</option>
+            <option value="Center-right">Center-right</option>
+            <option value="Far-left">Far-left</option>
+            <option value="Car-right">Far-right</option>
+            <option value="Syncretic">Syncretic</option>
+        </select>
+
+        <span>to</span>
+
+        <select name="fisPos2" id="field-fisPos2">
+            <option value=""></option>
+            <option value="big tent">Big tent</option>
+            <option value="left-wing">Left-wing</option>
+            <option value="right-wing">Right-wing</option>
+            <option value="center">Center</option>
+            <option value="center-left">Center-left</option>
+            <option value="center-right">Center-right</option>
+            <option value="far-left">Far-left</option>
+            <option value="far-right">Far-right</option>
+            <option value="syncretic">Syncretic</option>
+        </select>
+        <br>
+
+        <h2>Representation in Government</h2>
+
+        <p>This section is for filling out how many seats your party has. Blank fields won't be used.</p>
+
+        <div class="representation">
+            <label for="field-houseName1">Seats in the</label>
+            <input id="field-houseName1" name="houseName1" type="text"> =  
+            <input id="field-houseSeats1" name="houseSeats1" type="number" min=0> / 
+            <input id="field-houseTotal1" name="houseTotal1" type="number" min=0>
+            <br>
+
+            <label for="field-houseName2">Seats in the</label>
+            <input id="field-houseName2" name="houseName2" type="text"> =  
+            <input id="field-houseSeats2" name="houseSeats2" type="number" min=0> / 
+            <input id="field-houseTotal2" name="houseTotal2" type="number" min=0>
+            <br>
+
+            <label for="field-stateGov">State governorships = </label>
+            <input id="field-stateGov" name="stateGov" type="number" min=0> / 
+            <input id="field-stateGovTotal" name="stateGovTotal" type="number" min=0>
+            <br>
+
+            <label for="field-stateUp">Seats in state upper chambers = </label>
+            <input id="field-stateUp" name="stateUp" type="number" min=0> / 
+            <input id="field-stateUpTotal" name="stateUpTotal" type="number" min=0>
+            <br>
+
+            <label for="field-stateLow">Seats in state lower chambers = </label>
+            <input id="field-stateLow" name="stateLow" type="number" min=0> / 
+            <input id="field-stateLowTotal" name="stateLowTotal" type="number" min=0>
+            <br>
+
+            <label for="field-terrGov">Territorial governorships = </label>
+            <input id="field-terrGov" name="terrGov" type="number" min=0> / 
+            <input id="field-terrGovTotal" name="terrGovTotal" type="number" min=0>
+            <br>
+
+            <label for="field-terrUp">Seats in territorial upper chambers = </label>
+            <input id="field-terrUp" name="terrUp" type="number" min=0> / 
+            <input id="field-terrUpTotal" name="terrUpTotal" type="number" min=0>
+            <br>
+
+            <label for="field-terrLow">Seats in territorial lower chambers = </label>
+            <input id="field-terrLow" name="terrLow" type="number" min=0> / 
+            <input id="field-terrLowTotal" name="terrLowTotal" type="number" min=0>
+            <br>
+        </div>
+
+        <br><input id="submitBtn" type="submit">
+    </form>
+</body>
+</html>

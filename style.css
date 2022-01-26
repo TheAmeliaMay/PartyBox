@@ -1,0 +1,152 @@
+/*Note to self: organize this file some time*/
+
+* {
+    font-family: "Segoe UI", sans-serif;
+}
+
+html {
+    font-size: 0.95em;
+    line-height: 2;
+    background: white;
+}
+
+body {
+    padding: 10px 50px 50px 50px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+h1 {
+    border-top: 2px solid #800080;
+    border-bottom: 2px solid #800080;
+    text-align: center;
+}
+
+label {
+    display: inline-block;
+    min-width: 120px;
+}
+
+th {
+    vertical-align: top;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none none;
+}
+
+li {
+    line-height: 1.3em;
+}
+
+li:before {
+    content: "•  ";
+    color: black;
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+    min-width: 500px;
+}
+
+textarea {
+    min-height: 60px;
+}
+
+.colorName {
+    height: 20px;
+    min-width: 80px !important;
+    width: 80px;
+    position: relative;
+    top: -2px;
+}
+
+.fakeLink {
+    color: #3366cc;
+}
+
+.fakeLinkExt {
+    color: #3377aa;
+    background: url("external-ltr.svg");
+    background-position: center right;
+    background-repeat: no-repeat;
+    padding-right: 13px;
+}
+
+button,
+#submitBtn {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button {
+    margin-bottom: 10px;
+}
+
+#infoBox {
+    background: #F8F9FA;
+    border: 1px solid #a2a9b1;
+    padding: 0.2em;
+    font-size: 88%;
+    line-height: 1.3em;
+    text-align: left;
+    max-width: 360px;
+    float: right;
+}
+
+#partyName {
+    border-top: 2px solid #800080;
+    border-bottom: 2px solid #800080;
+    font-size: 125%;
+    font-weight: bold;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
+
+.legend-color {
+    border: 1px solid darkgray;
+    display: inline-block;
+    min-width: 1.25em;
+    height: 1.25em;
+}
+
+.seatsBar {
+    border: 1px solid darkgray;
+    height: 1.15em;
+    width: 100px;
+}
+
+.seatsBar div {
+    height: 1.15em;
+}
+
+.representation :is(label, input) {
+    min-width: unset;
+}
+
+@media only screen and (max-width: 767px) {
+    body {
+        padding: 0;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    textarea {
+        min-width: unset;
+        width: 98%;
+    }
+
+    input[type="color"] {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
