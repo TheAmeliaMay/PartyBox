@@ -20,7 +20,7 @@
         // Fill in all the previously submitted fields
         window.onload = function() {
             for(var pair of urlParams.entries()) {
-                if (pair[0] == 'nationalColors') {
+                if (pair[0] == 'nationalColors' || pair[0] == 'fullWidth') {
                     document.getElementById('field-'+pair[0]).checked = true;
                     continue;
                 }
@@ -59,7 +59,15 @@
 
             // Display the provided information
             if (urlParams.get('logo') !== '') {
-                document.write(`<tr><td colspan=2 style="padding-top:.4em;padding-bottom:.3em;text-align:center;"><img id="logo" src="${urlParams.get('logo')}" width=180></td></tr>`);
+                document.write(`<tr><td colspan=2 style="padding-top:.4em;padding-bottom:.3em;text-align:center;"><img id="logo" src="${urlParams.get('logo')}"`);
+
+                if (urlParams.get('fullWidth') == 'on') {
+                    document.write(' width=360');
+                } else {
+                    document.write(' width=180');
+                }
+
+                document.write('></td></tr>');
             }
 
             if (urlParams.get('abbr') !== '') {
@@ -260,7 +268,10 @@
         <input id="field-displayColor" name="displayColor" type="color" required><br>
 
         <label for="field-logo">Logo URL</label>
-        <input id="field-logo" name="logo" type="text"><br>
+        <input id="field-logo" name="logo" type="text">
+        <input id="field-fullWidth" name="fullWidth" type="checkbox">
+        <label for="field-fullWidth">full width</label>
+        <br>
 
         <label for="field-abbr">Abbreviation</label>
         <input id="field-abbr" name="abbr" type="text"><br>
