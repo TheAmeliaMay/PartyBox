@@ -160,6 +160,10 @@
                 document.write('</td></tr>');
             }
 
+            if (urlParams.get('slogan') !== '') {
+                document.write(`<tr><th>Slogan</th><td>${urlParams.get('slogan')}</td></tr>`);
+            }
+
             if (urlParams.get('houseName1') !== '' && urlParams.get('houseSeats1') !== '' && urlParams.get('houseTotal1') !== '') {
                 var percent = Math.round(urlParams.get('houseSeats1') / urlParams.get('houseTotal1') * 100);
                 document.write(`<tr><th>
@@ -260,6 +264,9 @@
 
         <label for="field-abbr">Abbreviation</label>
         <input id="field-abbr" name="abbr" type="text"><br>
+
+        <label for="field-slogan">Slogan</label>
+        <input id="field-slogan" name="slogan" type="text"><br>
 
         <label for="field-website">Website</label>
         <input id="field-website" name="website" type="text"><br>
