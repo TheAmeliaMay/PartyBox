@@ -106,23 +106,27 @@
                 document.write(`<tr><th class="fakeLink">Ideology</th><td><b>Majority:</b><ul><li class="fakeLink">${urlParams.get('majIdeo').replaceAll('\n', '</li><li class="fakeLink">')}</li></ul><b>Factions:</b><ul><li class="fakeLink">${urlParams.get('factions').replaceAll('\n', '</li><li class="fakeLink">')}</li></ul></td></tr>`);
             }
 
-            if (urlParams.get('position') !== '') {
-                document.write(`<tr><th>Political position</th><td><span class="fakeLink">${urlParams.get('position')}</span>`);
+            if (urlParams.get('position') !== '' || urlParams.get('socPos') !== '' || urlParams.get('fisPos') !== '') {
+                document.write(`<tr><th>Political position</th><td>`);
+
+                if (urlParams.get('position') !== '') {
+                    document.write(`<span class="fakeLink">${urlParams.get('position')}</span>`);
+                }
 
                 if (urlParams.get('position2') !== '') {
-                    document.write(` to <span class="fakeLink">${urlParams.get('position2')}</span>`);
+                    document.write(` to <span class="fakeLink">${urlParams.get('position2')}</span><br>`);
                 }
 
                 if (urlParams.get('socPos') !== '') {
-                    document.write(`<br><b>Social:</b> <span class="fakeLink">${urlParams.get('socPos')}</span>`)
+                    document.write(`<b>Social:</b> <span class="fakeLink">${urlParams.get('socPos')}</span>`)
                 }
 
                 if (urlParams.get('socPos2') !== '') {
-                    document.write(` to <span class="fakeLink">${urlParams.get('socPos2')}</span>`);
+                    document.write(` to <span class="fakeLink">${urlParams.get('socPos2')}</span><br>`);
                 }
 
                 if (urlParams.get('fisPos') !== '') {
-                    document.write(`<br><b>Fiscal:</b> <span class="fakeLink">${urlParams.get('fisPos')}</span>`)
+                    document.write(`<b>Fiscal:</b> <span class="fakeLink">${urlParams.get('fisPos')}</span>`)
                 }
 
                 if (urlParams.get('fisPos2') !== '') {
