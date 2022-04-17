@@ -43,11 +43,6 @@ li {
     line-height: 1.3em;
 }
 
-li:before {
-    content: "•  ";
-    color: black;
-}
-
 input[type="text"],
 input[type="url"],
 textarea {
